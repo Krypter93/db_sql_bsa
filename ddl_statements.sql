@@ -1,4 +1,5 @@
-/* Create database */ CREATE DATABASE MoviesDB;
+/* Create database */ 
+CREATE DATABASE MoviesDB;
 
 /* Create Table User */
 CREATE TABLE User (
@@ -9,3 +10,26 @@ CREATE TABLE User (
     Email VARCHAR(50) UNIQUE NOT NULL, 
     Password VARCHAR(100)
     );
+
+/* Create Table File */
+CREATE TABLE File (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Filename VARCHAR(100) UNIQUE NOT NULL,
+    MIMEType VARCHAR(100) NOT NULL,
+    Keyfile VARCHAR(100) UNIQUE NOT NULL,
+    FileURL VARCHAR(100) UNIQUE NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+/* Create Table Movie */
+CREATE TABLE Movie (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Title VARCHAR(100) NOT NULL,
+    Description VARCHAR(100) NOT NULL,
+    Budget DECIMAL(12,2) NOT NULL,
+    Release_date DATE NOT NULL,
+    Duration INT NOT NULL,
+    Country VARCHAR(100) NOT NULL,
+    Poster VARCHAR(100) NOT NULL
+);
