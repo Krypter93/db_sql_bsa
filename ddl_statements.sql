@@ -33,3 +33,25 @@ CREATE TABLE Movie (
     Country VARCHAR(100) NOT NULL,
     Poster VARCHAR(100) NOT NULL
 );
+
+/* Add Director column to Movie table */
+ALTER TABLE Movie ADD Director VARCHAR(100);
+
+/* Create Table Genres */
+CREATE TABLE Genres (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Genre_name VARCHAR(100) UNIQUE NOT NULL
+)
+
+Create Table Movie_Genres (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Movie_id INT NOT NULL,
+    Genre_id INT NOT NULL,
+    FOREIGN KEY (Movie_id) REFERENCES Movie(id),
+    FOREIGN KEY (Genre_id) REFERENCES Genres(id)
+)
+
+/* Create Table Character */
+CREATE TABLE Character (
+    
+)
