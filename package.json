@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Krypter93/db_sql_bsa/issues"
   },
-  "homepage": "https://github.com/Krypter93/db_sql_bsa#readme"
+  "homepage": "https://github.com/Krypter93/db_sql_bsa#readme",
+  "dependencies": {
+    "mysql2": "^3.10.3"
+  }
 }
