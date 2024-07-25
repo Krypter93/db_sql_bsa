@@ -44,7 +44,7 @@ ALTER TABLE Movie ADD Director VARCHAR(100);
 CREATE TABLE Genres (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     Genre_name VARCHAR(100) UNIQUE NOT NULL
-)
+);
 
 Create Table Movie_Genres (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -52,7 +52,7 @@ Create Table Movie_Genres (
     Genre_id INT NOT NULL,
     FOREIGN KEY (Movie_id) REFERENCES Movie(id),
     FOREIGN KEY (Genre_id) REFERENCES Genres(id)
-)
+);
 
 /* Create Table Character */
 CREATE TABLE `Character` (
@@ -60,13 +60,13 @@ CREATE TABLE `Character` (
     Name VARCHAR(100) NOT NULL,
     Description TEXT NOT NULL,
     Role ENUM('leading', 'supporting', 'background') NOT NULL
-)
+);
 
 /* Create Table Actor */
 CREATE TABLE Actor (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     Name VARCHAR(100) NOT NULL
-)
+);
 
 /* Create Table MovieCharacter */
 Create Table MovieCharacter (
@@ -75,7 +75,7 @@ Create Table MovieCharacter (
     Character_id INT NOT NULL,
     FOREIGN KEY (Movie_id) REFERENCES Movie(id),
     FOREIGN KEY (Character_id) REFERENCES `Character`(id)
-)
+);
 
 /* Create Table CharacterActor */
 CREATE TABLE CharacterActor (
@@ -84,7 +84,7 @@ CREATE TABLE CharacterActor (
     Actor_id INT NOT NULL,
     FOREIGN KEY (Character_id) REFERENCES `Character`(id),
     FOREIGN KEY (Actor_id) REFERENCES Actor(id)
-)
+);
 
 /* Add column Lastname to Actor table */
 ALTER TABLE Actor ADD Lastname VARCHAR(100) NOT NULL;
@@ -98,7 +98,7 @@ CREATE TABLE Person (
     Home_country VARCHAR(100) NOT NULL,
     main_image VARCHAR(100) NOT NULL,
     FOREIGN KEY (actor_id) REFERENCES Actor(id)
-)
+);
 
 /* Create PersonImages Table */
 CREATE TABLE PersonImages (
@@ -106,7 +106,7 @@ CREATE TABLE PersonImages (
     person_id INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     FOREIGN KEY (person_id) REFERENCES Person(actor_id)
-)
+);
 
 /* Modify FileURL Column in File Table */
 ALTER TABLE File MODIFY FileURL VARCHAR(255) NOT NULL;
@@ -118,7 +118,7 @@ CREATE TABLE FavoriteMovies (
     PRIMARY KEY (user_id, movie_id),
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (movie_id) REFERENCES Movie(id)
-)
+);
 
 
 /* Procedure to add createdAt and updatedAt columns to all tables */
@@ -167,3 +167,5 @@ ALTER TABLE Movie MODIFY Description TEXT NOT NULL;
 /* Modify main_image column in Person table */
 ALTER TABLE Person MODIFY main_image VARCHAR(255) NOT NULL;
 
+/* Modify Name in Actor table to Firstname */
+ALTER TABLE Actor CHANGE Name Firstname VARCHAR(100) NOT NULL;
