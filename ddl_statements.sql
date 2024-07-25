@@ -1,6 +1,9 @@
 /* Create database */ 
 CREATE DATABASE MoviesDB;
 
+/* Select database */
+USE MoviesDB;
+
 /* Create Table User */
 CREATE TABLE User (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
