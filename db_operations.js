@@ -19,7 +19,8 @@ const connectionToDatabase = async () => {
 
 connectionToDatabase()
 
-/* const runQueries = async () => {
+/* Test query */
+const runQuery = async () => {
     try {
         const connection = await connectionToDatabase()
 
@@ -32,5 +33,5 @@ connectionToDatabase()
     }
 }
 
-runQueries() */
+runQuery()
 
