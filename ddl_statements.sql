@@ -83,3 +83,78 @@ CREATE TABLE CharacterActor (
     FOREIGN KEY (Actor_id) REFERENCES Actor(id)
 )
 
+/* Add column Lastname to Actor table */
+ALTER TABLE Actor ADD Lastname VARCHAR(100) NOT NULL;
+
+/* Create Person Table */
+CREATE TABLE Person (
+    actor_id INT PRIMARY KEY NOT NULL,
+    Biography LONGTEXT NOT NULL,
+    Date_of_birth DATE NOT NULL,
+    Gender VARCHAR(10) NOT NULL,
+    Home_country VARCHAR(100) NOT NULL,
+    main_image VARCHAR(100) NOT NULL,
+    FOREIGN KEY (actor_id) REFERENCES Actor(id)
+)
+
+/* Create PersonImages Table */
+CREATE TABLE PersonImages (
+    image_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    person_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES Person(actor_id)
+)
+
+/* Modify FileURL Column in File Table */
+ALTER TABLE File MODIFY FileURL VARCHAR(255) NOT NULL;
+
+/* Create Table FavoriteMovies */
+CREATE TABLE FavoriteMovies (
+    user_id INT NOT NULL,
+    movie_id INT NOT NULL,
+    PRIMARY KEY (user_id, movie_id),
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (movie_id) REFERENCES Movie(id)
+)
+
+
+/* Procedure to add createdAt and updatedAt columns to all tables */
+DELIMITER //
+
+CREATE PROCEDURE AddTimestampsToAllTables()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE tableName VARCHAR(255);
+    DECLARE cur CURSOR FOR 
+        SELECT table_name 
+        FROM information_schema.tables 
+        WHERE table_schema = DATABASE() 
+        AND table_type = 'BASE TABLE';
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO tableName;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Add createdAt and updatedAt columns
+        SET @query = CONCAT('ALTER TABLE `', tableName, '` ',
+                            'ADD COLUMN createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, ',
+                            'ADD COLUMN updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;');
+        PREPARE stmt FROM @query;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt;
+    END LOOP;
+
+    CLOSE cur;
+END //
+
+DELIMITER ;
+
+/* Execute the procedure */
+CALL AddTimestampsToAllTables();
+
