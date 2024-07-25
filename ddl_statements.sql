@@ -52,6 +52,34 @@ Create Table Movie_Genres (
 )
 
 /* Create Table Character */
-CREATE TABLE Character (
-    
+CREATE TABLE `Character` (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Description TEXT NOT NULL,
+    Role ENUM('leading', 'supporting', 'background') NOT NULL
 )
+
+/* Create Table Actor */
+CREATE TABLE Actor (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Name VARCHAR(100) NOT NULL
+)
+
+/* Create Table MovieCharacter */
+Create Table MovieCharacter (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Movie_id INT NOT NULL,
+    Character_id INT NOT NULL,
+    FOREIGN KEY (Movie_id) REFERENCES Movie(id),
+    FOREIGN KEY (Character_id) REFERENCES `Character`(id)
+)
+
+/* Create Table CharacterActor */
+CREATE TABLE CharacterActor (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Character_id INT NOT NULL,
+    Actor_id INT NOT NULL,
+    FOREIGN KEY (Character_id) REFERENCES `Character`(id),
+    FOREIGN KEY (Actor_id) REFERENCES Actor(id)
+)
+
