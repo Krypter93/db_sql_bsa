@@ -158,3 +158,9 @@ DELIMITER ;
 /* Execute the procedure */
 CALL AddTimestampsToAllTables();
 
+/* Modify Description column in Movie table */
+ALTER TABLE Movie MODIFY Description TEXT NOT NULL;
+
+/* Modify main_image column in Person table */
+ALTER TABLE Person MODIFY main_image VARCHAR(255) NOT NULL;
+
