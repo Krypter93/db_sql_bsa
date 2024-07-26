@@ -169,3 +169,23 @@ ALTER TABLE Person MODIFY main_image VARCHAR(255) NOT NULL;
 
 /* Modify Name in Actor table to Firstname */
 ALTER TABLE Actor CHANGE Name Firstname VARCHAR(100) NOT NULL;
+
+Delete Director and Country columns from Movie table
+ALTER TABLE Movie DROP COLUMN Director, DROP COLUMN Country;
+
+/* Create Director TABLE */
+CREATE TABLE Director (
+    id_director INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Firstname VARCHAR(100) NOT NULL,
+    Lastname VARCHAR(100) NOT NULL,
+    movie_id INT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES Movie(id)
+);
+
+/* Create Country Table */
+CREATE TABLE Country (
+    id_country INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    Country_name VARCHAR(100) UNIQUE NOT NULL,
+    movie_id INT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES Movie(id)
+);
