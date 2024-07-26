@@ -189,3 +189,7 @@ CREATE TABLE Country (
     movie_id INT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES Movie(id)
 );
+
+/* Update Genres table */
+UPDATE Genres SET Genre_name = 'Action' WHERE id = 1;
+UPDATE Genres SET Genre_name = 'Drama' WHERE id = 2;
