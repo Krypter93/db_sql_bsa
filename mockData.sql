@@ -15,9 +15,24 @@ VALUES
 /* Insert fake data into Movie table */
 INSERT INTO Movie (Title, Description, Budget, Release_date, Duration, Country, Poster, Director)
 VALUES 
-('The Great Adventure', 'An epic adventure movie', 100000000, '2022-05-15', 120, 'USA', 'http://example.com/poster1.jpg', 'John Director'),
-('Mystery of the Lost City', 'A thrilling mystery movie', 75000000, '2023-07-20', 130, 'UK', 'http://example.com/poster2.jpg', 'Jane Director'),
-('Space Odyssey', 'A science fiction movie', 150000000, '2021-12-01', 140, 'Canada', 'http://example.com/poster3.jpg', 'Michael Director');
+('The Great Adventure', 'An epic adventure movie', 100000000, '2022-05-15', 120, 'http://example.com/poster1.jpg'),
+('Mystery of the Lost City', 'A thrilling mystery movie', 75000000, '2023-07-20', 130, 'http://example.com/poster2.jpg'),
+('Space Odyssey', 'A science fiction movie', 150000000, '2021-12-01', 140, 'http://example.com/poster3.jpg');
+
+/* Insert fake data into Director table */
+INSERT INTO Director (Firstname, Lastname, movie_id)
+VALUES 
+('John', 'Director', 1),
+('Jane', 'Director', 2),
+('Michael', 'Director', 3);
+
+/* Insert fake data into Country table */
+INSERT INTO Country (Country_name, movie_id)
+VALUES 
+('USA', 1),
+('UK', 2),
+('Canada', 3);
+
 
 /* Insert fake data into Genres table */
 INSERT INTO Genres (Genre_name)
